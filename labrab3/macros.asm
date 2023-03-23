@@ -2,7 +2,7 @@
 ; define a macro that deletes a given character from a string
 delete_char MACRO string, char
 	LOCAL loop_start, loop_end, if_not_match
-	mov esi, OFFSET string ; esi points to the beginning of the string
+	mov esi, string ; esi points to the beginning of the string
 	mov ecx, 0          ; initialize the loop counter to 0
 loop_start:
 	cmp byte ptr [esi+ecx], 0 ; compare the current character to the 0 terminator
@@ -14,7 +14,7 @@ if_not_match:
 	inc ecx
 	jmp loop_start
 loop_end:
-	mov esi, OFFSET string ; reset esi to the beginning of the string
+	mov esi, string ; reset esi to the beginning of the string
 	add esi, edx        ; add the offset of the character to be deleted
 	; ecx is a maximum length of the string
 	sub ecx, edx        ; subtract the offset of the character to be deleted
@@ -26,8 +26,8 @@ ENDM
 count_words MACRO string
     LOCAL loop_start, loop_end
     mov eax, 1              ; Initialize words counter
-    mov ecx, 0              ; Initialize the counter to zero
-    mov esi, [string]          ; Get the address of the string
+        mov ecx, 0              ; Initialize the counter to zero
+        mov esi, string    ; Get the address of the string
     
     loop_start:
         cmp byte ptr [esi+ecx], 0    ; Check for end of string

@@ -26,31 +26,32 @@
 
 .data
   text db "Hello world!",10,0
-  chr db 'H'
+  char db 'H'
 .code
 start:
-	; DO NOT read input from the user
-	; Don't ever try
-
 	; print the text
 	print "Text:",10	; 10 = '\n'
 	print addr text,10
 
 	; print the chr character
-	print "Character to delete: ",10
-	print chr,10
+	;print "Character to delete: ",10
+	;print chr$(char,10)
 
 	; example usage of the delete_char macro
-	delete_char text, chr
+	delete_char OFFSET text, char
 
-	; example usege of the count_words macro
-	; result in eax
-	count_words text
-	
 	; print result
 	print "Result:",10
 	print addr text
 
+	; example usege of the count_words macro
+	; result in eax
+	count_words OFFSET text
+        
+        mov ebx, eax
+
+	; print words count
 	print "Words:",10
-	print str$(eax)
+	print str$(ebx),10,0
+
 end start
